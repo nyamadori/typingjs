@@ -19,14 +19,7 @@ export default {
       problems: [
         { displayText: '東京特許許可局', kanaText: 'とうきょうとっきょきょかきょく' },
         { displayText: '彼はよく柿喰う客だ', kanaText: 'かれはよくかきくうきゃくだ' },
-        { displayText: '62円の値打ちしかないの', kanaText: '62えんのねうちしかないの' },
-        { displayText: '僕のラブレター', kanaText: 'ぼくのらぶれたー' },
-        { displayText: '読んだのなら返事くらいくれてもいいのに', kanaText: 'よんだのならへんじくらいくれてもいいのに' },
-        { displayText: '何気なく歩道歩けば', kanaText: 'なにげなくほどうあるけば' },
-        { displayText: '壁の破れた', kanaText: 'かべのやぶれた' },
-        { displayText: '映画のポスター君を誘って断られたっけ', kanaText: 'えいがのぽすたーきみをさそってことわられたっけ' },
-        { displayText: 'んにゃ', kanaText: 'んにゃ' },
-        { displayText: '関西電気保安協会', kanaText: 'かんさいでんきほあんきょうかい' }
+        { displayText: '62円の切手', kanaText: '62えんのきって' }
       ],
       problemIndex: 0,
       acceptedRomanText: '',

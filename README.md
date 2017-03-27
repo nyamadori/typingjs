@@ -1,6 +1,6 @@
 # typingjs
 
-> A Vue.js project
+タイピングゲーム
 
 ## Build Setup
 
@@ -25,3 +25,9 @@ npm test
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## Assets
+
+### Sound Effect
+
+* [ポケットサウンド/効果音素材]("http://pocket-se.info/")

@@ -30,4 +30,4 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 ### Sound Effect
 
-* [ポケットサウンド/効果音素材]("http://pocket-se.info/")
+* [ポケットサウンド/効果音素材](http://pocket-se.info/)

@@ -1,10 +1,11 @@
 <template>
-  <div>
+  <div class="container">
     <div v-if="!finished" class="problem">
-      <div class="display-text">{{ problem.displayText }}</div>
-      <div class="roman-text">
-        <span class="accepted">{{ acceptedRomanText }}</span
-        ><span class="remain">{{ remainRomanText }}</span>
+      <div :style="displayTextStyle" class="display-text">{{ problem.displayText }}</div>
+      <div :style="romanTextStyle" class="roman-text">
+        <span v-for="char in acceptedChars" class="accepted-char">{{ char }}</span
+        ><span class="remain head">{{ remainRomanTextHead }}</span
+        ><span class="remain tail">{{ remainRomanTextTail }}</span>
       </div>
     </div>
 
@@ -20,9 +21,8 @@ export default {
   data () {
     return {
       problems: [
-        { displayText: '東京特許許可局', kanaText: 'とうきょうとっきょきょかきょく' },
-        { displayText: '彼はよく柿喰う客だ', kanaText: 'かれはよくかきくうきゃくだ' },
-        { displayText: '62円の切手', kanaText: '62えんのきって' }
+        { displayText: '吾輩は猫である。名前はまだ無い。', kanaText: 'わがはいはねこである。なまえはまだない。' },
+        { displayText: 'どこで生れたかとんと見当けんとうがつかぬ。', kanaText: 'どこでうまれたかとんとけんとうがつかぬ。' }
       ],
       problemIndex: 0,
       acceptedRomanText: '',
@@ -37,6 +37,34 @@ export default {
 
     finished () {
       return this.problemIndex >= this.problems.length
+    },
+
+    remainRomanTextHead () {
+      return this.remainRomanText[0]
+    },
+
+    remainRomanTextTail () {
+      return this.remainRomanText.slice(1)
+    },
+
+    acceptedChars () {
+      return this.acceptedRomanText.split('')
+    },
+
+    romanText () {
+      return this.acceptedRomanText + this.remainRomanText
+    },
+
+    displayTextStyle () {
+      return {
+        fontSize: 100.0 / this.problem.displayText.length * 0.8 + 'vw'
+      }
+    },
+
+    romanTextStyle () {
+      return {
+        fontSize: 100.0 / this.romanText.length * 1.5 + 'vw'
+      }
     }
   },
 
@@ -117,6 +145,8 @@ export default {
         if (this._parser.finished) {
           this.problemIndex++
         }
+
+        if (this.finished) this.problemIndex = 0
       } else {
         console.log('ng', char)
         this.playSound('missType')
@@ -126,25 +156,83 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+@keyframes fade {
+  0% {
+    opacity: 1;
+    top: 0;
+  }
+
+  100% {
+    opacity: 0;
+    top: 300px;
+  }
+}
+
+@keyframes blink {
+  0% {
+    color: #888;
+    text-shadow: 0 0 2px #000;
+  }
+
+  100% {
+    color: #ecfff7;
+    text-shadow: 0 0 8px #ecfff7;
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
 .problem {
   text-align: center;
+  font-size: 7vw;
+  font-smoothing: antialiased;
 }
 
 .display-text {
-  font-size: 3rem;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #3a3a3a;
+  font-size: 0.8em;
+  color: #ecfff7;
+  text-shadow: 0 0 8px #ecfff7;
 }
 
 .roman-text {
-  font-family: 'Avenir';
-  font-size: 1.5rem;
+  padding-top: 0px;
+  font-family: 'Avenir Next', sans-serif;
+  font-size: 0.8em;
+  font-weight: 100;
 }
 
-.accepted {
-  color: #aaa;
+.accepted-char {
+  display: inline-block;
+  position: relative;
+  animation-name: fade;
+  animation-duration: 0.5s;
+  animation-delay: 0s;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
 }
 
-.remain:first-letter {
-  text-decoration: underline;
+.remain {
+  &.head {
+    display: inline-block;
+    position: relative;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-delay: 1s;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+
+  &.tail {
+    color: #3a3a3a;
+  }
 }
 </style>
